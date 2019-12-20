@@ -177,6 +177,8 @@ Error message and password prompt
 
 <li>$:/languages/zh-Hans</li>
 
+<li>$:/plugins/danielo/encryptTiddler</li>
+
 <li>$:/plugins/tiddlywiki/highlight</li>
 
 <li>$:/plugins/tiddlywiki/markdown</li>
@@ -435,9 +437,15 @@ Error message and password prompt
 
 <li>关于付费订阅</li>
 
+<li>懒惰青年的笔记术</li>
+
 <li>聊聊密码安全啥的</li>
 
 <li>目录</li>
+
+<li>为何 Markdown</li>
+
+<li>为何 Markdown.html</li>
 
 <li>小老鼠闲话软件</li>
 
@@ -9688,9 +9696,7 @@ Error message and password prompt
 <div status="complete" title="$:/Import">
 <pre>下列条目已被导入：
 
-# [[AliPay-240.jpg]]
-# [[QQPay-240.jpg]]
-# [[WePay-240.jpg]]</pre>
+# [[为何 Markdown.html]]</pre>
 </div>
 <div created="20191210105937546" modified="20191210105939555" title="$:/Import!!popup-小老鼠闲话软件.md">
 <pre>no</pre>
@@ -13350,6 +13356,109 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div author="DanieloRodrigez" bag="default" core-version="&gt;=5.1.1" dependents="" description="adds the ability to encrypt single tiddlers" list="Encrypt-Tiddler Changelog" plugin-type="plugin" revision="0" source="https://github.com/danielo515/TIddlywiki5-EncryptTiddlerPlugin" title="$:/plugins/danielo/encryptTiddler" type="application/json" version="2.1">
+<pre>{
+    &quot;tiddlers&quot;: {
+        &quot;$:/plugins/danielo/encryptTiddler/Changelog&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/Changelog&quot;,
+            &quot;text&quot;: &quot;!! V2.1\n* Added control panel.\n* Added ability to batch encrypt and decrypt tiddlers.\n* Added some documentation an language strings.\n\n&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/control-panel/batch-encrypt&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/control-panel/batch-encrypt&quot;,
+            &quot;caption&quot;: &quot;Batch Encryption&quot;,
+            &quot;text&quot;: &quot;\\define lingo-base() $:/language/Search/\n&lt;&lt;lingo Filter/Hint&gt;&gt;\n{{$:/plugins/danielo/encryptTiddler/language/batch}}\n\n&lt;$linkcatcher to=\&quot;$:/temp/encrypt/filter\&quot;&gt;\n\n&lt;div class=\&quot;tc-search tc-advanced-search\&quot;&gt;\n&lt;$edit-text tiddler=\&quot;$:/temp/encrypt/filter\&quot; type=\&quot;search\&quot; tag=\&quot;input\&quot; default=\&quot;\&quot; placeholder=\&quot;filter tiddlers\&quot;/&gt;\n&lt;$button popup=&lt;&lt;qualify \&quot;$:/state/filterDropdown\&quot;&gt;&gt; class=\&quot;tc-btn-invisible\&quot;&gt;\n{{$:/core/images/down-arrow}}\n&lt;/$button&gt;\n&lt;$reveal state=\&quot;$:/temp/encrypt/filter\&quot; type=\&quot;nomatch\&quot; text=\&quot;\&quot;&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;\n&lt;$action-setfield $tiddler=\&quot;$:/temp/encrypt/filter\&quot; $field=\&quot;text\&quot; $value=\&quot;\&quot;/&gt;\n{{$:/core/images/close-button}}\n&lt;/$button&gt;\n\n\n&lt;$edit-text tag=\&quot;input\&quot; tiddler=\&quot;$:/temp/password\&quot; placeholder=\&quot;password\&quot; type=\&quot;password\&quot; default=\&quot;\&quot; col=\&quot;4\&quot;/&gt;&lt;$encryptTiddler passwordTiddler=\&quot;$:/temp/password\&quot; filter={{$:/temp/encrypt/filter}}&gt;\n&lt;$button message=\&quot;tw-encrypt-tiddler\&quot;&gt;\nEncrypt\n&lt;/$button&gt;\n&lt;$button message=\&quot;tw-decrypt-tiddler\&quot;&gt;\nDecrypt\n&lt;/$button&gt;\n&lt;/$encryptTiddler&gt;\n&lt;/$reveal&gt;\n&lt;/div&gt;\n\n&lt;div class=\&quot;tc-block-dropdown-wrapper\&quot;&gt;\n&lt;$reveal state=&lt;&lt;qualify \&quot;$:/state/filterDropdown\&quot;&gt;&gt; type=\&quot;nomatch\&quot; text=\&quot;\&quot; default=\&quot;\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown tc-edit-type-dropdown\&quot;&gt;\n&lt;$list filter=\&quot;[all[shadows+tiddlers]tag[$:/tags/Filter]!sort[]] -[[$:/core/Filters/SystemTags]] -[[$:/core/Filters/AllTags]]\&quot;&gt;&lt;$link to={{!!filter}}&gt;&lt;$transclude field=\&quot;description\&quot;/&gt;&lt;/$link&gt;\n&lt;/$list&gt;\n&lt;/div&gt;\n&lt;/$reveal&gt;\n&lt;/div&gt;\n\n&lt;/$linkcatcher&gt;\n\n&lt;$reveal state=\&quot;$:/temp/encrypt/filter\&quot; type=\&quot;nomatch\&quot; text=\&quot;\&quot;&gt;\n&lt;$set name=\&quot;resultCount\&quot; value=\&quot;\&quot;\&quot;&lt;$count filter={{$:/temp/encrypt/filter}}/&gt;\&quot;\&quot;\&quot;&gt;\n&lt;div class=\&quot;tc-search-results\&quot;&gt;\n&lt;&lt;lingo Filter/Matches&gt;&gt;\n&lt;$list filter={{$:/temp/encrypt/filter}} template=\&quot;$:/plugins/danielo/encryptTiddler/ui/listItemTemplate\&quot;/&gt;\n&lt;/div&gt;\n&lt;/$set&gt;\n&lt;/$reveal&gt;&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/control-panel&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/control-panel&quot;,
+            &quot;tags&quot;: &quot;$:/tags/ControlPanel&quot;,
+            &quot;caption&quot;: &quot;Encrypt Tiddlers&quot;,
+            &quot;text&quot;: &quot;\\define prefix(name) $:/plugins/danielo/encryptTiddler/control-panel/$name$\n\n&lt;$macrocall $name=\&quot;tabs\&quot; tabsList=\&quot;[all[shadows+tiddlers]prefix[$:/plugins/danielo/encryptTiddler/control-panel/]]\&quot; default=&lt;&lt;prefix \&quot;batch-encrypt\&quot;&gt;&gt; state=\&quot;$:/state/encryptTiddler/control-panel/tabs\&quot;&gt;&gt;&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/crypt-batch-button&quot;: {
+            &quot;creator&quot;: &quot;Danielo&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/crypt-batch-button&quot;,
+            &quot;text&quot;: &quot;&lt;span title=\&quot;Encrypt/Decrypt tiddler\&quot; class=\&quot;pc-batch-controls\&quot;&gt;\n&lt;$reveal state=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; type=\&quot;nomatch\&quot; text={{!!title}} animate=\&quot;no\&quot;&gt;&lt;$button set=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; setTo={{!!title}} class=\&quot;tc-btn-invisible\&quot;&gt;{{$:/plugins/danielo/encryptTiddler/unlocked}}&lt;/$button&gt;&lt;/$reveal&gt;&lt;$reveal state=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; type=\&quot;match\&quot; text={{!!title}} animate=\&quot;no\&quot;&gt;&lt;$button set=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; setTo=\&quot;\&quot; class=\&quot;tc-btn-invisible\&quot;&gt;{{$:/plugins/danielo/encryptTiddler/unlocked}}&lt;/$button&gt;&lt;/$reveal&gt;\n&lt;$encryptTiddler passwordTiddler=\&quot;$:/temp/password\&quot; filter={{$:/temp/encrypt/filter}}&gt;&lt;$reveal state=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; type=\&quot;match\&quot; text={{!!title}} animate=\&quot;yes\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown tw-crypt-dropdown\&quot;&gt;\n&lt;span class=\&quot;tw-password-field\&quot;&gt;&lt;$edit-text tiddler=\&quot;$:/temp/password\&quot; tag=\&quot;input\&quot; type=\&quot;password\&quot; default=\&quot;\&quot; placeholder=\&quot;password\&quot; class=\&quot;tc-edit-texteditor\&quot;/&gt;&lt;/span&gt;\n&lt;span class=\&quot;tw-crypt-button\&quot;&gt; &lt;$button message=\&quot;tw-encrypt-tiddler\&quot;  set=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; setTo=\&quot;\&quot; &gt;Encrypt&lt;/$button&gt; &lt;$button message=\&quot;tw-decrypt-tiddler\&quot; set=&lt;&lt;qualify \&quot;$:/state/encrypt\&quot;&gt;&gt; setTo=\&quot;\&quot; &gt;Decrypt&lt;/$button&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;/$reveal&gt;&lt;/$encryptTiddler&gt;\n&lt;/span&gt;&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/crypt-button&quot;: {
+            &quot;created&quot;: &quot;20140405233000477&quot;,
+            &quot;creator&quot;: &quot;Danielo&quot;,
+            &quot;modified&quot;: &quot;20140608121335075&quot;,
+            &quot;tags&quot;: &quot;$:/tags/ViewToolbar button encrypt export&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/crypt-button&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;span title=\&quot;Encrypt/Decrypt tiddler\&quot;&gt;&lt;$transclude tiddler=\&quot;$:/plugins/danielo/encryptTiddler/openPopup\&quot;/&gt;\n&lt;/span&gt;&lt;$encryptTiddler passwordTiddler=\&quot;$:/temp/password\&quot;&gt;&lt;$reveal state=\&quot;$:/state/encrypt\&quot; type=\&quot;match\&quot; text={{!!title}} animate=\&quot;yes\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown tw-crypt-dropdown\&quot;&gt;\n&lt;span class=\&quot;tw-password-field\&quot;&gt;&lt;$edit-text tiddler=\&quot;$:/temp/password\&quot; tag=\&quot;input\&quot; type=\&quot;password\&quot; default=\&quot;\&quot; placeholder=\&quot;password\&quot; class=\&quot;tc-edit-texteditor\&quot;/&gt;&lt;/span&gt;\n&lt;span class=\&quot;tw-crypt-button\&quot;&gt; &lt;$list filter=\&quot;[all[current]!has[encrypted]]\&quot;&gt; &lt;$button message=\&quot;tw-encrypt-tiddler\&quot;  set=\&quot;$:/state/encrypt\&quot; setTo=\&quot;\&quot; &gt;Encrypt&lt;/$button&gt;&lt;/$list&gt;&lt;$list filter=\&quot;[is[current]has[encrypted]]\&quot;&gt; &lt;$button message=\&quot;tw-decrypt-tiddler\&quot; set=\&quot;$:/state/encrypt\&quot; setTo=\&quot;\&quot; &gt;Decrypt&lt;/$button&gt;&lt;/$list&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;/$reveal&gt;&lt;/$encryptTiddler&gt;\n&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/Encrypt-Tiddler&quot;: {
+            &quot;created&quot;: &quot;20140406153742691&quot;,
+            &quot;creator&quot;: &quot;pepito&quot;,
+            &quot;description&quot;: &quot;add the hability to encrypt individual tiddlers&quot;,
+            &quot;modified&quot;: &quot;20141029152631265&quot;,
+            &quot;modifier&quot;: &quot;Danielo Rodriguez&quot;,
+            &quot;tags&quot;: &quot;index plugins&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/Encrypt-Tiddler&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;caption&quot;: &quot;readme&quot;,
+            &quot;text&quot;: &quot;This plugin adds the ability to encrypt your tiddlers individually. This have several advantages:\n\n* You can specify a different password for each tiddler if you want.\n* You don't have to encrypt your whole wiky.\n* If you forget your password, you only lose a tiddler.\n* It's possible to edit the tiddler content , tags and fields ''except the encrypt field'' after encryption. Decrypting your tiddler will restore it to its original state when you encrypted it. This way you can hide the encrypted tiddlers as a \&quot;different\&quot; thing.\n* You can even encrypt images.\n* You can have sensible data in a day to day wiky.\n* I didn't try this, but theoretically you can apply double encryption by encrypting your wiki too.&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/encrypttiddler.js&quot;: {
+            &quot;text&quot;: &quot;/*\\\ntitle: $:/plugins/danielo/encryptTiddler/encrypttiddler.js\ntype: application/javascript\nmodule-type: widget\n\nencrypttiddler widget\n\n```\n\n```\n\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\&quot;use strict\&quot;;\n\nvar Widget = require(\&quot;$:/core/modules/widgets/widget.js\&quot;).widget;\n\nvar encryptTiddlerWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n\tthis.addEventListeners([\n\t\t\t{type: \&quot;tw-encrypt-tiddler\&quot;, handler: \&quot;handleEncryptevent\&quot;},\n\t\t\t{type: \&quot;tw-decrypt-tiddler\&quot;, handler: \&quot;handleDecryptevent\&quot;},\n\t\t\t]);\n};\n\n/*\nInherit from the base widget class\n*/\nencryptTiddlerWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nencryptTiddlerWidget.prototype.render = function(parent,nextSibling) {\n\tconsole.log(\&quot;Render\&quot;);\n\tthis.parentDomNode = parent;\n\tthis.computeAttributes();\n\tthis.execute();\n\tthis.renderChildren(parent,nextSibling);\n};\n\n/*\nCompute the internal state of the widget\n*/\nencryptTiddlerWidget.prototype.execute = function() {\n\t// Get attributes\n\t this.tiddlerTitle=this.getAttribute(\&quot;tiddler\&quot;,this.getVariable(\&quot;currentTiddler\&quot;));\n\t this.filter=this.getAttribute(\&quot;filter\&quot;,undefined);\n \t this.passwordTiddler=this.getAttribute(\&quot;passwordTiddler\&quot;);\n\t// Construct the child widgets\n\tconsole.log(this.targetTiddler);\n\t\tthis.makeChildWidgets();\n};\n\n/*\nSelectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering\n*/\nencryptTiddlerWidget.prototype.refresh = function(changedTiddlers) {\n\tvar changedAttributes = this.computeAttributes();\n\tif(changedAttributes.tiddler || changedAttributes.filter) {\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t} else {\n\t\treturn this.refreshChildren(changedTiddlers);\n\t}\n};\n\nencryptTiddlerWidget.prototype.getTiddlersToProcess = function(){\n\tif(this.filter){ //we have a filter to work with\n\t\treturn this.wiki.filterTiddlers(this.filter);\n\t}else{ //single tiddler case\n\t\tvar tiddler = this.wiki.getTiddler(this.tiddlerTitle);\n\t\treturn tiddler? [tiddler.fields.title] : [];\n\t}\n};\n\nencryptTiddlerWidget.prototype.handleEncryptevent = function(event){\n\tvar password = this.getPassword();\n\tvar tiddlers = this.getTiddlersToProcess();\n\n\tif(tiddlers.length &gt; 0 &amp;&amp; password){\n\t\tvar self = this;\n\t\t$tw.utils.each(tiddlers, function(title){\n\t\t\tvar tiddler = self.wiki.getTiddler(title);\n\t\t\tvar fields={text:\&quot;!This is an encrypted Tiddler\&quot;,\n\t\t\t\t\t\t\t\t  encrypted:self.encryptFields(title,password)};\n\t\t\tself.saveTiddler(tiddler,fields);\n\t\t});\n\n\t}else{\n\t\tconsole.log(\&quot;We did not find any tiddler to encrypt or password not set!\&quot;)\n\t}\n};\n\nencryptTiddlerWidget.prototype.handleDecryptevent = function(event){\n\tvar password =this.getPassword();\n\tvar tiddlers = this.getTiddlersToProcess();\n\n\tif(tiddlers.length &gt; 0 &amp;&amp; password){\n\t\tvar self = this;\n\t\t$tw.utils.each(tiddlers, function(title){\n\t\t\tvar tiddler = self.wiki.getTiddler(title);\n\t\t\tvar fields = self.decryptFields(tiddler,password);\n\t\t\tif(fields)self.saveTiddler(tiddler,fields);\n\t\t});\n\t}\n};\n\nencryptTiddlerWidget.prototype.saveTiddler=function(tiddler,fields){\n\tthis.wiki.addTiddler(  new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,this.clearNonStandardFields(tiddler), fields ) )\n}\n\nencryptTiddlerWidget.prototype.encryptFields = function (title,password){\n\tvar jsonData=this.wiki.getTiddlerAsJson(title);\n\treturn $tw.crypto.encrypt(jsonData,password);\n\n};\n\nencryptTiddlerWidget.prototype.decryptFields = function(tiddler,password){\n\t\tvar JSONfields =$tw.crypto.decrypt(tiddler.fields.encrypted,password);\n\t\tif(JSONfields!==null){\n\t\t\treturn JSON.parse(JSONfields);\n\t\t}\n\t\tconsole.log(\&quot;Error decrypting \&quot;+tiddler.fields.title+\&quot;. Probably bad password\&quot;)\n\t\treturn false\n};\n\nencryptTiddlerWidget.prototype.getPassword = function(){\n\tvar tiddler=this.wiki.getTiddler(this.passwordTiddler);\n\tif(tiddler){\n\t\tvar password=tiddler.fields.text;\n\t\tthis.saveTiddler(tiddler); //reset password tiddler\n\t\treturn password;\n\t}\n\n\treturn false\n};\n\n// This function erases every field of a tiddler that is not standard and also\n// the text field\nencryptTiddlerWidget.prototype.clearNonStandardFields =function(tiddler) {\n\tvar standardFieldNames = \&quot;title tags modified modifier created creator\&quot;.split(\&quot; \&quot;);\n\t\tvar clearFields = {};\n\t\tfor(var fieldName in tiddler.fields) {\n\t\t\tif(standardFieldNames.indexOf(fieldName) === -1) {\n\t\t\t\tclearFields[fieldName] = undefined;\n\t\t\t}\n\t\t}\n\t\tconsole.log(\&quot;Cleared fields \&quot;+JSON.stringify(clearFields));\n\t\treturn clearFields;\n};\n\nexports.encryptTiddler = encryptTiddlerWidget;\n\n})();&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/encrypttiddler.js&quot;,
+            &quot;type&quot;: &quot;application/javascript&quot;,
+            &quot;module-type&quot;: &quot;widget&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/Filters/encrypted-tiddlers&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/Filters/encrypted-tiddlers&quot;,
+            &quot;description&quot;: &quot;All encrypted tiddlers&quot;,
+            &quot;filter&quot;: &quot;[has[encrypted]]&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Filter&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/Filters/normal-unencrypted-tiddlers&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/Filters/normal-unencrypted-tiddlers&quot;,
+            &quot;filter&quot;: &quot;[!is[system]!has[encrypted]]&quot;,
+            &quot;description&quot;: &quot;Non-encrypted normal tiddlers&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Filter&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/language/batch&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/language/batch&quot;,
+            &quot;text&quot;: &quot;Use below controls to encrypt or decrypt a bunch of tiddlers. Encryption ''controls are hidden'' until you type something in the search box. All listed tiddlers will be affected. The presence of a small padlock (&lt;span class=\&quot;pc-listItem-lock\&quot;&gt;{{$:/core/images/locked-padlock}}&lt;/span&gt;) next to the tiddler title indicates that particular tiddler is already encrypted.&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/ui/listItemTemplate&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/ui/listItemTemplate&quot;,
+            &quot;text&quot;: &quot;&lt;div class=\&quot;tc-menu-list-item\&quot;&gt;\n&lt;$link to={{!!title}}&gt;\n&lt;$view field=\&quot;title\&quot;/&gt;\n&lt;$list filter=\&quot;[all[current]has[encrypted]]\&quot;&gt;\n&lt;span class=\&quot;pc-listItem-lock\&quot;&gt;{{$:/core/images/locked-padlock}}&lt;/span&gt;\n&lt;/$list&gt;\n&lt;/$link&gt;\n&lt;/div&gt;&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/openPopup&quot;: {
+            &quot;created&quot;: &quot;20140406151910358&quot;,
+            &quot;creator&quot;: &quot;Danielo&quot;,
+            &quot;modified&quot;: &quot;20140608121417975&quot;,
+            &quot;modifier&quot;: &quot;pepito&quot;,
+            &quot;tags&quot;: &quot;button encrypt export&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/openPopup&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;$reveal state=\&quot;$:/state/encrypt\&quot; type=\&quot;nomatch\&quot; text={{!!title}} animate=\&quot;no\&quot;&gt;&lt;$button set=\&quot;$:/state/encrypt\&quot; setTo={{!!title}} class=\&quot;tc-btn-invisible\&quot;&gt;{{$:/plugins/danielo/encryptTiddler/unlocked}}&lt;/$button&gt;&lt;/$reveal&gt;&lt;$reveal state=\&quot;$:/state/encrypt\&quot; type=\&quot;match\&quot; text={{!!title}} animate=\&quot;no\&quot;&gt;&lt;$button set=\&quot;$:/state/encrypt\&quot; setTo=\&quot;\&quot; class=\&quot;tc-btn-invisible\&quot;&gt;{{$:/plugins/danielo/encryptTiddler/unlocked}}&lt;/$button&gt;&lt;/$reveal&gt;&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/styles&quot;: {
+            &quot;created&quot;: &quot;20140406110705085&quot;,
+            &quot;creator&quot;: &quot;pepito&quot;,
+            &quot;modified&quot;: &quot;20140608121510064&quot;,
+            &quot;modifier&quot;: &quot;pepito&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Stylesheet encrypt export&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/styles&quot;,
+            &quot;type&quot;: &quot;text/plain&quot;,
+            &quot;text&quot;: &quot;.tw-password-field {\n\tdisplay: inline-block;\n\twidth: 55%;\n  font-size:1em;\n  line-height:0;\n  margin:0;\n\tpadding-left:7%;\n}\n\n.pc-batch-controls .tw-crypt-dropdown{\n\tright: 0px;\n}\n\n.pc-batch-controls{\n\t\tposition:relative;\n}\n\n.pc-listItem-lock svg{\n\theight: 1em;\n\twidth: 1em;\n\tfill: #aaaaaa;\n}\n\n/*It is for use in combination with tc-block-dropdown */\n.tw-crypt-dropdown{\n      line-height:0;\n\t\t\tpadding-left:5px;\n\t\t\t}\n\n.tw-password-field input{\n       font-size:0.5em;\n\n}\n\n.tw-crypt-button {\n\tdisplay: inline-block;\n\twidth: 10%;\n}\n\n.tw-crypt-button button{\n\tfont-size:0.5em;\n}\n&quot;
+        },
+        &quot;$:/plugins/danielo/encryptTiddler/unlocked&quot;: {
+            &quot;created&quot;: &quot;20140406101339943&quot;,
+            &quot;creator&quot;: &quot;danielo515&quot;,
+            &quot;modified&quot;: &quot;20140608121532690&quot;,
+            &quot;modifier&quot;: &quot;danielo515&quot;,
+            &quot;tags&quot;: &quot;encrypt export&quot;,
+            &quot;title&quot;: &quot;$:/plugins/danielo/encryptTiddler/unlocked&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;svg version=\&quot;1.1\&quot; id=\&quot;Capa_1\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot; class=\&quot;tc-image-button\&quot;\n\t viewBox=\&quot;0 0 100 100\&quot; style=\&quot;enable-background:new 0 0 100 100;\&quot; xml:space=\&quot;preserve\&quot;&gt;\n&lt;g&gt;\n\t&lt;path d=\&quot;M77.555,50H35.304V31.63c0-4.057,1.435-7.521,4.305-10.391c2.87-2.87,6.333-4.305,10.391-4.305\n\t\tc4.056,0,7.52,1.435,10.39,4.305s4.305,6.335,4.305,10.391c0,0.996,0.363,1.857,1.091,2.583c0.727,0.729,1.588,1.09,2.583,1.09\n\t\th3.674c0.995,0,1.856-0.361,2.583-1.09c0.727-0.727,1.091-1.588,1.091-2.583c0-7.079-2.517-13.136-7.549-18.17\n\t\tC63.136,8.428,57.08,5.912,50,5.912c-7.081,0-13.137,2.516-18.169,7.548c-5.033,5.034-7.549,11.091-7.549,18.17V50h-1.837\n\t\tc-1.531,0-2.833,0.536-3.904,1.608c-1.072,1.072-1.607,2.372-1.607,3.902v33.067c0,1.532,0.535,2.832,1.607,3.904\n\t\tc1.071,1.072,2.372,1.608,3.904,1.608h55.11c1.53,0,2.832-0.536,3.904-1.608c1.071-1.072,1.607-2.372,1.607-3.904V55.51\n\t\tc0-1.529-0.536-2.83-1.607-3.902C80.387,50.536,79.085,50,77.555,50z M54.315,72.937V83.72c0,2.173-1.762,3.935-3.935,3.935H49.62\n\t\tc-2.173,0-3.935-1.762-3.935-3.935V72.937c-2.31-1.443-3.852-4.001-3.852-6.925c0-4.511,3.657-8.167,8.167-8.167\n\t\ts8.167,3.657,8.167,8.167C58.167,68.937,56.625,71.495,54.315,72.937z\&quot;/&gt;\n&lt;/g&gt;\n&lt;/svg&gt;\n&quot;
+        }
+    }
+}</pre>
+</div>
 <div author="JoaoBolila" core-version="&gt;=5.0.0" dependents="" description="Highlight.js: syntax highlighting" list="readme usage howto license" plugin-type="plugin" title="$:/plugins/tiddlywiki/highlight" type="application/json" version="5.1.21">
 <pre>{
     &quot;tiddlers&quot;: {
@@ -13613,8 +13722,8 @@ Error message and password prompt
 <div created="20191214080128912" modified="20191214080128912" title="$:/state/plugin-info-334910430-$:/core---1812962263">
 <pre>contents</pre>
 </div>
-<div created="20191210110839856" modified="20191217035915732" title="$:/state/showeditpreview">
-<pre>no</pre>
+<div created="20191210110839856" modified="20191218053342774" title="$:/state/showeditpreview">
+<pre>yes</pre>
 </div>
 <div created="20191214080106474" modified="20191214080120280" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
@@ -13631,13 +13740,13 @@ Error message and password prompt
 <div created="20191210100910506" modified="20191217033829988" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
-<div created="20191210110141059" modified="20191217035902291" title="$:/state/tab/moresidebar-1850697562">
-<pre>$:/core/ui/MoreSideBar/Tags</pre>
+<div created="20191210110141059" modified="20191219132524687" title="$:/state/tab/moresidebar-1850697562">
+<pre>$:/core/ui/MoreSideBar/All</pre>
 </div>
 <div created="20191210105854437" modified="20191217035858812" title="$:/state/tab/sidebar--595412856">
 <pre>$:/core/ui/SideBar/More</pre>
 </div>
-<div created="20191217035714012" list="关于付费订阅 IndexItem 目录" modified="20191217035904704" title="$:/StoryList">
+<div created="20191219132517291" list="目录 [[为何 Markdown]]" modified="20191219132528452" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20191214080103649" modified="20191214080103649" title="$:/temp/advancedsearch">
@@ -13656,7 +13765,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;file:///E:/WorkSpace/TiddlyWiki/%E9%95%BF%E6%96%87%E5%A4%87%E5%BF%98%E5%BD%95.html&quot;
+            &quot;text&quot;: &quot;file:///E:/WorkSpace/TiddlyWiki/long-story.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
@@ -13676,7 +13785,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/E:/WorkSpace/TiddlyWiki/%E9%95%BF%E6%96%87%E5%A4%87%E5%BF%98%E5%BD%95.html&quot;
+            &quot;text&quot;: &quot;/E:/WorkSpace/TiddlyWiki/long-story.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -14767,6 +14876,110 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 &lt;/span&gt;
 &lt;/$list&gt;</pre>
 </div>
+<div created="20191218035321424" description="初步讨论一下我记录和管理笔记的方法。" modified="20191218035357409" title="懒惰青年的笔记术" type="text/x-markdown">
+<pre>已经不好意思再写少年了呢，啊啊，真是伤感。
+
+不过，少年时代的小老鼠也不做笔记。记忆力还行，差不多的事情就放在脑子里就好了，放在笔记里，需要的时候再翻看，这和让这些知识在它原本的书本、网站上有什么区别。
+
+后来，发现许多当时记得很清楚的东西，因为太久没用上，而变得想不起来了。连点用来回忆的线索都没留下，人生的时间线上徒增了一片空白。
+
+我觉得，**笔记还是应该注意一下的**，如果这件事情不麻烦的话。
+
+不麻烦的办法也不是没有，市面上的云笔记，选择一个自己用着顺手的就好。但是小老鼠走的是另外的一条路线，我聊聊，你听听，我们共同探讨一下。
+
+## 格式
+
+如果仅仅是文字内容的记载，那么 txt 的格式也是可以满足的。不过这样在文档内就没有任何格式了，纯文本。
+
+显然我们对于格式还是有需求的，尤其是在内容更长的时候。那么 Word 就可以算是另外一种选择。在内容格式上它肯定是比较强大了，但一方面我们会觉得使用这种软件比较笨重，另一方面在格式上我们也会觉得有些麻烦，并且作为笔记，我们也不希望搞出这么复杂的格式来。
+
+所以 markdown 可以算是一个在上述两者中取得平衡的方案。
+
+它以纯文本为载体，用非常简单的符号来标示常用的格式。如果你还不会，那么拿出 10 分钟来，就足够学会日常使用的各种格式了。
+
+因为是纯文本，所以保存下来的体积也比较小，用各种文本编辑器都可以打开和编辑，又可以轻松的标记出如标题加粗之类的常用格式。这些优势让他确实比较适合用作笔记和文档。
+
+最基本的 markdown 语法，确实只有基本格式，甚至连表格都不包括。这对于基本的笔记需求也差不多可以满足了。而且，现在已经有相当多的编辑器支持基本的 markdown 语法。
+
+但是免不了我们会有各式各样专业的需求，比如最基本的表格，比如公式，比如流程图，甘特图，思维导图……这些可以通过增强的 markdown 语法来实现。
+
+这里需要注意的是，即便是增强版的语法，依旧是以文本为载体，依旧是可以用任何文本编辑器来打开和编辑。只有当需要查看它渲染效果的时候，才需要找支持对应语法的编辑器来渲染。
+
+## 存储
+
+因为使用的就是基本的文档，我们可以按照一般文件那样去处理，比如使用各种网盘进行存储和备份，你也可以选择同时使用多个网盘来保证数据的安全。
+
+也非常推荐大家使用 gIt 进行版本管理，git 和版本管理的概念我会在以后展开来讲。Github 现在的私密仓库是免费的，还有一些其他家提供商也有免费的私密仓库。我们可以利用他们非常好的去存储和备份我们的笔记文件。甚至实现了无限历史版本。
+
+## 使用
+
+上面的道理我们都懂，但是实际使用起来可能并不那么方便。对着我们所讲的方法，和直接使用 txt 或者 word 好像区别不大。
+
+但其实，稍微完善一点的 Markdown 编辑器，都可以进行整目录的浏览，甚至对目录下文件，有一个摘要性的显示。这个效果和在常用的云笔记里，查看笔记列表，已经没有太大的区别了。
+
+而如果你像我一样经常去写代码什么的，也可以用自己惯用的编辑器，反正都会支持 markdown 语法。这时候各种复杂的编辑和批量操作都可以轻易的实现。
+
+或者我们退一步，使用如 TEA 和 VNote 之类的笔记软件。它们在使用的体验上绝对不输商业笔记软件，或者更强，或者有自己的特色。这些就根据自己的使用习惯去选择就好。而问题的关键在于，他们支持将笔记导出为 markdown 文件。这就意味着，当我用的不爽的时候，随时都可以更换工具。
+
+不被平台所束缚，就意味着更多的选择权。这意味着你可以选择适合自己的工具，而不是去适应平台的各种改变。
+
+在这些软件里，甚至不缺乏可以多平台使用的工具。虽然我并不觉得手机适合用来做笔记，但是偶尔的只言片语还是有可能需要的。
+
+我自己会使用 simplenote 来在手机上做笔记，它很简单，而且支持 markdown。这意味着我可以用它去记录，去同步。又可以很方便的通过复制粘贴，把内容整理进我其他的笔记之中。
+
+而在电脑上，我可能用各种编辑器来编辑 markdown 文档。例如现在用 Typora 来编辑这篇内容。而教程的写作我一般使用 VSCode。
+
+一般的，把笔记文件放在一起，根据它们的相互关系去分文件夹存放，就可以很好的进行整理了。如果需要一些更复杂的管理操作检索，也可以借助如 TEA 和 VNote 之类的笔记软件。
+
+## 维基
+
+而我最近在使用 TiddlyWiki，一款单网页的 wiki 系统。
+
+因为 TiddlyWiki 是把所有数据都储存在一个文件之内，所以它更适合于文字内容的管理，而不要大量的导入图片等文件。
+
+Wiki 这个概念我是很喜欢的，因为知识不是一个线性的系统，它是无数的知识点，纵横交错，相互连结，然后形成网络。
+
+所以逐条孤立的笔记并不适合用来描述一个体系的知识，而 wiki 正好解决了这个问题。
+
+笔记之间相互平等，没有什么顺序的关系，但又可以十分自由的相互引用连接，真正的去形成一个立体的网络结构。
+
+而且 TiddlyWiki 的导入十分方便，各种文档直接拖进去就是了，理所当然的也支持 markdown。在各处写的内容，只要拖进去让它去管理就好。
+
+而且它的导出功能也很完善和强大，这让我感到十分安心。
+
+## 元数据
+
+无法将笔记导出的笔记软件，就是在耍流氓。随着日积月累，这上面的数据越来越多，我们就被强行的捆绑在了这个工具之上，任它如何改变，我们都只能被迫的去适应它，而无法逃离。
+
+支持导出，却无法导出通用格式，或者导出的内容难以用来导入到其他平台。那就是存心在给用户设置障碍。
+
+所以我们的一条笔记，其实并不仅仅是标题和内容，它还包含有许多的元数据。不要管元数据是个什么东东，反正都有一条笔记，它的创建时间，更改时间，分类，标签，来源等等信息，在导出的时候都应该予以保留。这也是在我使用某一款笔记软件之前，所要重点考察的内容之一。
+
+如果使用过一些静态博客系统的同学，可能会发现，我讲的这些和用 markdown 文档生成博客时的情形差不多。因为静态博客中的文章，其实就是在文档开始加上了必要原数据之后的 markdown 文档。
+
+这也就解释了，为什么许多朋友喜欢使用博客来做笔记，因为它们之间的共性很多。而且如果两者都足够开放，那么数据上很容易互通。而且在博客中像在 wiki 中一样，可以非常方便在各个条目中相互连接。
+
+## 摘抄
+
+网页摘抄也是我们笔记的一大来源，虽然先马后看，基本就等于再也不看。但是不能够进行摘抄的笔记就不是好笔记。
+
+现在一大部分 markdown 笔记软件，已经支持了在网页上复制，然后粘贴进来就自动转换为 markdown 语法。
+
+还有一些浏览器扩展用来专门实现类似的功能，在使用体验上和商业笔记软件的摘抄功能基本一致，甚至更好。比如：[Web Clipper](https://chrome.google.com/webstore/detail/mhfbofiokmppgdliakminbgdgcmbhbac) 和 [MaoXian web clipper](https://chrome.google.com/webstore/detail/kjahokgdcbohofgdidndeiaigkehdjdc) 。
+
+如果是在手机上，我并不认为很适合摘抄。当然，如果是一段文本，完全可以复制之后粘贴到笔记软件里，或者选中之后分享到笔记软件里。
+
+而如果是一个网页，我一般会选择发送到 Pocket 之类的稍后阅读服务，等打开电脑的时候，再进行进一步的整理。
+
+## 待展开
+
+本片涉及到的一些内容，我会在后续进行展开讲解：
+
+* markdown 语法
+* markdown 增强语法（图表类
+* 笔记软件
+* TiddlyWiki</pre>
+</div>
 <div created="20191211024107024" description="给大家简单的介绍一下密码安全相关的知识。" modified="20191217034450915" title="聊聊密码安全啥的" type="text/x-markdown">
 <pre>密码就是用来保障我们账户安全的，我设置了密码，并且记住了密码是什么，所以我的账户很安全。
 
@@ -14939,6 +15152,854 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 
 !! 关于付费订阅的说明
 {{关于付费订阅}}</pre>
+</div>
+<div created="20191219132039592" description="使用 Markdwon 的原因，和它的基础语法。" modified="20191219132740284" title="为何 Markdown" type="text/x-markdown">
+<pre>&gt;本篇显示有些错乱，可阅读 [为何 Markdown.html](#为何 Markdown.html)
+
+Markdown 的语法十分简单。我们先来看看常用的几种。
+
+```markdown
+# 一号标题 #
+## 二号标题 ##
+### 三号标题 ###
+```
+
+这样就形成了我们常见的标题，一共有 6 个大小，我就不一一列出了。在大部分编辑器里都支持省略掉后面的井号，会更加方便。需要注意标题必须是单独的一行，并以井号开头。
+
+```markdown
+这样来**加粗内容**。
+```
+
+在一部分编辑器里，可能需要使用空格把被加粗部分和其他内容分隔一下才能正确识别，像这样：
+
+```markdown
+注意后面有个空格 **加粗内容**。
+```
+
+## 我的理解
+
+以上是 Markdown 里面最简单的两种标记，实在没什么难度，看一眼就能学会那种。不过我们写文字类的笔记文章，上面这样的格式应该是最常用的。
+
+虽然我们要聊 Markdown 的语法。但其实关于语法的教程，在网上随便搜一下就有好多。因为很简单，随便看个 10 来分钟就学会了。所以其实这并不是我们今天的重点，我更想讲一讲它的特点和优势。我们要用它，那就要了解为什么要用的它。
+
+### 一、简单
+
+我已经说了好几次，它很简单。但这个简单其实是多方面的。如上，它在书写上和使用上都非常的简单。
+
+你好你好你好，而最终保存出来的其实也是一个文本文档，只是换了一种后缀而已。所以在文件格式上它也很简单。
+
+就因为这个简单的文件格式，我们可以用各种文本编辑器去打开编辑它，所以编辑很简单。
+
+就算是编辑器并不支持这种语法，也并不怎么影响我们去书写它，这又回到了最初的，语法很简单。
+
+### 二、够用
+
+它规定了一些常用的基础格式，当然不只是我们上面举例的这两种。基本上涵盖了我们日常写文章、文档、笔记之类的需求。它并不追求大而全，够用就好。如果有特别的需求，再通过各种扩展来满足。
+
+这使得入门的学习成本极低，而入门以后足够解决日常的各种需求。这样的设计对于新人来说十分友好。
+
+而它本身只是对格式的标记，具体的样式交给编辑器去处理。我们也可以根据自己的需求，去设定渲染的样式。
+
+当然大部分时候我们都不是去写公文，所以对格式上并没有那么严苛的要求，只要让各种内容能够明确的区分，层级清晰，各种引用遂我所愿，就已经足够了。那么也正好与它的简单够用相契合，就很舒适很省心。
+
+### 三、顺手
+
+可以在任何文本编辑器里去书写，也仅仅是在打字的时候，多敲几个字符来标记一下内容。这基本不会改变我们写内容的习惯，也不会因为去费力找按钮而打断思路，又不会因为频繁的切换键盘和鼠标而令人着恼。
+
+就是畅快的去打字，随着你的思路去书写。不需要为了格式而停顿，而思考。跟着直觉随手标记一下，一篇有格式的文档就出来了。只能说这个感觉太友好了，当你文思泉涌的时候，它会让你感到行云流水，酣畅淋漓。
+
+### 四、通用
+
+现在支持 Markdown 语法的编辑器越来越多了，而且越来越好用。在以前我们一定有过这样的体验，把一段内容从这个编辑器复制到那个编辑器，结果差异很大，甚至惨不忍睹。于是我们还要再做一番修改。
+
+而现在我们不太用操心这个问题了，因为我们只是去标记这个内容是什么，而渲染器负责解释这个元素应该长成什么样子。虽然不同渲染器之间还是会有各式各样的差异，但是大体情况并不会发生什么变化，因为语法太简单了，正确的去解释，这很容易做到。
+
+而如果你对最终的渲染结果不满意，随时可以再换一个渲染器去渲染。即便同一个渲染器，也可能带有不同的主题供你选择。
+
+然而这些都不是重点，渲染的结果喜欢或者不喜欢，我们随时都可以重新选择。而这些与我们文档本身无关，我们仅仅是标记某个元素，应该是标题，至于这个标题长什么样子，那不重要，因为我们可以随时几乎无限的去做选择。
+
+### 五、强扩展性
+
+想做一个待办列表，好的，我们可以支持；
+
+想插入公式，好的，我们可以支持；
+
+想插入思维导图，好的，我们可以支持；
+
+想插入流程图，好的，我们可以支持；
+
+想插入甘特图，好的，我们可以支持；
+
+想插入五线谱，好的，我们可以支持；
+
+……
+
+有各式各样的扩展来增强这种语言。对，我们学不会这么多，我们选择它就是因为它很简单。
+
+所以，Markdown 语法本身，连表格都不包含。根据自己的需求，去选择相应的扩展学习，相应的语法。用多少就选多少，用多少就学多少。不用增加额外的负担，没有必要的付出。
+
+### 六、目的性
+
+回头来看，它的目的性十分明确。
+
+一切的一切就是为了让你痛快的去书写，尽可能的不让其他的因素对你产生干扰。
+
+除了书写，你无需再费心其他，这时候的书写就成了单纯的享受。
+
+### 七、并不重要
+
+道理都懂了，决定学一下它。其实哪有什么可学的啊！
+
+我是觉得除了段落之间要用两个换行来分隔，这个点不说一下，很可能造成新人的困惑，其他真的并不重要。
+
+因为现在编辑器对于 Markdown 的支持实在是太好了。你可以向使用以往的编辑器那样去使用它们。不知道语法就去使用上面的工具按钮，然后它就帮你自动写出来了。如果是常用的元素，那么看两次，你也就记住它的语法了；如果是不常用的元素，也没有什么必要刻意的去劳神记忆它。
+
+对于标题，后面的井号写不写没所谓了。
+
+对于链接，如果是正常的网址，那么不需要标记，大部分编辑器就自动识别了。
+
+都有图片，好多编辑器都支持直接粘贴，或者拖入文件了。甚至还能够根据设定自动把这些文件复制到合适的位置，或者上传到在线图床。
+
+我不是说没有必要去学习语法，更不是说语法不重要。只是在了解它设计的初衷之后，又在现在这么便利的环境之下，其实没有什么必要很刻意的去学习了。直接用起来，未尝不可。
+
+Markdown 的大标题有三种写法——如果我们还在追求这种问题的答案，那就有点儿现代孔乙己了。
+
+如果有时间，去简单看两眼基础语法，这挺好，但不用特别去记忆。反正用多了就记住了嘛，记不住的可能也就是不怎么用得上。
+
+如果忙着写东西，一个好一点的编辑器，也能解决一大部分问题，保存下来的还是具有上述所有优点的 Markdown 文档。
+
+如果有专业需求，增加了各种扩展，哦，这个语法确实要去看一下了。不过一般来讲，大家都会遵循 Markdown 这种简单的精神，也都很干净利落，容易记忆。
+
+### 八、甚至说
+
+什么东西都不可能很完美，我有遇到过它无法实现我想法的时候。又或者说我只是很偶尔的需要某一个小小的功能，我只是用一小下，为此去额外增加一个扩展或者不方便，或者没必要。
+
+诸如此类各种尴尬的情形。
+
+那，就直接写 HTML 吧！它，支持的。
+
+当然这个技能在许多网站上就不能使用了，出于安全考虑，一般网站上是不会支持的。但如果是在自己的笔记里，能兼容 HTML 真的是一种放纵的感觉。
+
+## 附录：我常用到的语法
+
+### 标题
+
+```markdown
+# 一号标题 #
+## 二号标题 ##
+### 三号标题 ###
+#### 四号标题 ####
+##### 五号标题 #####
+###### 六号标题 ######
+```
+
+或者
+
+```markdown
+# 一号标题
+## 二号标题
+### 三号标题
+#### 四号标题
+##### 五号标题
+###### 六号标题
+```
+
+还有
+
+```markdown
+一号标题（下一行三个等号标记
+===
+
+二号标题（下一行三个减号标记
+---
+```
+
+### 文字
+
+```markdown
+**加粗**
+*斜体*
+~~删除线~~
+```
+
+或者
+
+```markdown
+__加粗__
+_斜体_
+```
+
+其实我就用加粗，别的记不住。
+
+### 列表
+
+无序列表
+
+```markdown
+* 第一项
+* 第二项
+* 第三项
++ 前面是加号也可以
+- 减号也可以
+* 但我还是喜欢用星号
+```
+
+有序列表
+
+```markdown
+1. 第一项
+2. 第二项
+3. 第三项
+4. 数字后面必须是英文句点
+5. 句点后面要空格，然后再些内容
+```
+
+### 引用
+
+```markdown
+&gt; 这样就是引用，注意大于号后面要有一个空格
+&gt; 
+&gt; 多行内容，每行前面都要有大于号
+```
+
+### 代码
+
+行内代码
+
+```markdown
+行内代码 `Hello World!`，这样用反引号（就是主键盘数字 1 左侧那个按键）包裹。
+```
+
+多行代码
+
+```markdown
+​```javascript
+三个反引号，然后写语言名称（主要用于代码高亮的识别）
+然后里面放入代码，无需其他加工。
+最后三个反引号结尾。
+注意起始和结尾都需要单独一行。
+​```
+```
+
+### 链接
+
+```markdown
+[要显示的文字](要链接到的地址)
+```
+
+### 图片
+
+```markdown
+![图片的描述](图片的地址)
+```
+
+这里，图片的描述部分可能可以加入更多的参数，比如图片显示的尺寸等。
+
+### 水平线
+
+```markdown
+
+---
+
+```
+
+很多人会告诉你三个减号就是水平线。但其实除了它要独占一行以外，上下两行也要是空行，否则可能有歧义。
+
+### 转义
+
+```markdown
+\*123\*
+```
+
+这样写就不会出现斜体，而是输出 \*123\*。就是在符号前加上斜线，就会直接输出这个符号，而不去当作标记解释。
+
+---
+
+差不多就这样吧，常用的也就这么些了，其实我自己也就记了一半吧。用起来就知道了，有一些真的不怎么常用的。</pre>
+</div>
+<div title="为何 Markdown.html" type="text/html">
+<pre>&lt;!doctype html&gt;
+&lt;html style='font-size:18px !important'&gt;
+&lt;head&gt;
+&lt;meta charset='UTF-8'&gt;&lt;meta name='viewport' content='width=device-width initial-scale=1'&gt;
+&lt;title&gt;为何 Markdown&lt;/title&gt;&lt;link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css' /&gt;&lt;style type='text/css'&gt;html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:&quot;Lucida Console&quot;,Consolas,&quot;Courier&quot;,monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li &gt; figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type=&quot;checkbox&quot;], input[type=&quot;radio&quot;] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type=&quot;checkbox&quot;] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure &gt; table { margin: 0px !important; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote &gt; :last-child { margin-bottom: 0px; }
+blockquote &gt; :first-child, li &gt; :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p &gt; .md-image:only-child:not(.md-img-error) img, p &gt; img:only-child { display: block; margin: auto; }
+p &gt; .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable=&quot;true&quot;]:active, [contenteditable=&quot;true&quot;]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item &gt; input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: &quot;.&quot;; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: &quot;Segoe UI Symbol&quot;, sans-serif; }
+.md-diagram-panel &gt; svg { max-width: 100%; }
+[lang=&quot;mermaid&quot;] svg, [lang=&quot;flow&quot;] svg { max-width: 100%; height: auto; }
+[lang=&quot;mermaid&quot;] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^=&quot;mermaidChart&quot;] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&amp;subset=latin,latin-ext);
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: &quot;Open Sans&quot;,&quot;Clear Sans&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+#write &gt; ul:first-child,
+#write &gt; ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li&gt;ol,
+li&gt;ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item &gt; input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block&gt;.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write&gt;h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write&gt;h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write&gt;h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write&gt;h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image&gt;.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: &quot;Segoe UI&quot;, &quot;Arial&quot;, sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body class='typora-export os-windows' &gt;
+&lt;div  id='write'  class = 'is-node'&gt;&lt;h1&gt;&lt;a name=&quot;为何-markdown&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;为何 Markdown&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span&gt;Markdown 的语法十分简单。我们先来看看常用的几种。&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header1 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header1&quot;&gt;# 一号标题 #&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header2 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header2&quot;&gt;## 二号标题 ##&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header3 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header3&quot;&gt;### 三号标题 ###&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 75px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 75px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;这样就形成了我们常见的标题，一共有 6 个大小，我就不一一列出了。在大部分编辑器里都支持省略掉后面的井号，会更加方便。需要注意标题必须是单独的一行，并以井号开头。&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;这样来&lt;span class=&quot;cm-strong&quot;&gt;**加粗内容**&lt;/span&gt;。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;在一部分编辑器里，可能需要使用空格把被加粗部分和其他内容分隔一下才能正确识别，像这样：&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;注意后面有个空格 &lt;span class=&quot;cm-strong&quot;&gt;**加粗内容**&lt;/span&gt;。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a name=&quot;我的理解&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;我的理解&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;span&gt;以上是 Markdown 里面最简单的两种标记，实在没什么难度，看一眼就能学会那种。不过我们写文字类的笔记文章，上面这样的格式应该是最常用的。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;虽然我们要聊 Markdown 的语法。但其实关于语法的教程，在网上随便搜一下就有好多。因为很简单，随便看个 10 来分钟就学会了。所以其实这并不是我们今天的重点，我更想讲一讲它的特点和优势。我们要用它，那就要了解为什么要用的它。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;一简单&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;一、简单&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;我已经说了好几次，它很简单。但这个简单其实是多方面的。如上，它在书写上和使用上都非常的简单。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;你好你好你好，而最终保存出来的其实也是一个文本文档，只是换了一种后缀而已。所以在文件格式上它也很简单。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;就因为这个简单的文件格式，我们可以用各种文本编辑器去打开编辑它，所以编辑很简单。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;就算是编辑器并不支持这种语法，也并不怎么影响我们去书写它，这又回到了最初的，语法很简单。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;二够用&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;二、够用&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;它规定了一些常用的基础格式，当然不只是我们上面举例的这两种。基本上涵盖了我们日常写文章、文档、笔记之类的需求。它并不追求大而全，够用就好。如果有特别的需求，再通过各种扩展来满足。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;这使得入门的学习成本极低，而入门以后足够解决日常的各种需求。这样的设计对于新人来说十分友好。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;而它本身只是对格式的标记，具体的样式交给编辑器去处理。我们也可以根据自己的需求，去设定渲染的样式。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;当然大部分时候我们都不是去写公文，所以对格式上并没有那么严苛的要求，只要让各种内容能够明确的区分，层级清晰，各种引用遂我所愿，就已经足够了。那么也正好与它的简单够用相契合，就很舒适很省心。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;三顺手&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;三、顺手&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;可以在任何文本编辑器里去书写，也仅仅是在打字的时候，多敲几个字符来标记一下内容。这基本不会改变我们写内容的习惯，也不会因为去费力找按钮而打断思路，又不会因为频繁的切换键盘和鼠标而令人着恼。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;就是畅快的去打字，随着你的思路去书写。不需要为了格式而停顿，而思考。跟着直觉随手标记一下，一篇有格式的文档就出来了。只能说这个感觉太友好了，当你文思泉涌的时候，它会让你感到行云流水，酣畅淋漓。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;四通用&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;四、通用&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;现在支持 Markdown 语法的编辑器越来越多了，而且越来越好用。在以前我们一定有过这样的体验，把一段内容从这个编辑器复制到那个编辑器，结果差异很大，甚至惨不忍睹。于是我们还要再做一番修改。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;而现在我们不太用操心这个问题了，因为我们只是去标记这个内容是什么，而渲染器负责解释这个元素应该长成什么样子。虽然不同渲染器之间还是会有各式各样的差异，但是大体情况并不会发生什么变化，因为语法太简单了，正确的去解释，这很容易做到。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;而如果你对最终的渲染结果不满意，随时可以再换一个渲染器去渲染。即便同一个渲染器，也可能带有不同的主题供你选择。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;然而这些都不是重点，渲染的结果喜欢或者不喜欢，我们随时都可以重新选择。而这些与我们文档本身无关，我们仅仅是标记某个元素，应该是标题，至于这个标题长什么样子，那不重要，因为我们可以随时几乎无限的去做选择。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;五强扩展性&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;五、强扩展性&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;想做一个待办列表，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;想插入公式，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;想插入思维导图，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;想插入流程图，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;想插入甘特图，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;想插入五线谱，好的，我们可以支持；&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;……&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;有各式各样的扩展来增强这种语言。对，我们学不会这么多，我们选择它就是因为它很简单。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;所以，Markdown 语法本身，连表格都不包含。根据自己的需求，去选择相应的扩展学习，相应的语法。用多少就选多少，用多少就学多少。不用增加额外的负担，没有必要的付出。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;六目的性&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;六、目的性&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;回头来看，它的目的性十分明确。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;一切的一切就是为了让你痛快的去书写，尽可能的不让其他的因素对你产生干扰。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;除了书写，你无需再费心其他，这时候的书写就成了单纯的享受。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;七并不重要&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;七、并不重要&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;道理都懂了，决定学一下它。其实哪有什么可学的啊！&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;我是觉得除了段落之间要用两个换行来分隔，这个点不说一下，很可能造成新人的困惑，其他真的并不重要。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;因为现在编辑器对于 Markdown 的支持实在是太好了。你可以向使用以往的编辑器那样去使用它们。不知道语法就去使用上面的工具按钮，然后它就帮你自动写出来了。如果是常用的元素，那么看两次，你也就记住它的语法了；如果是不常用的元素，也没有什么必要刻意的去劳神记忆它。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;对于标题，后面的井号写不写没所谓了。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;对于链接，如果是正常的网址，那么不需要标记，大部分编辑器就自动识别了。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;都有图片，好多编辑器都支持直接粘贴，或者拖入文件了。甚至还能够根据设定自动把这些文件复制到合适的位置，或者上传到在线图床。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;我不是说没有必要去学习语法，更不是说语法不重要。只是在了解它设计的初衷之后，又在现在这么便利的环境之下，其实没有什么必要很刻意的去学习了。直接用起来，未尝不可。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;Markdown 的大标题有三种写法——如果我们还在追求这种问题的答案，那就有点儿现代孔乙己了。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;如果有时间，去简单看两眼基础语法，这挺好，但不用特别去记忆。反正用多了就记住了嘛，记不住的可能也就是不怎么用得上。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;如果忙着写东西，一个好一点的编辑器，也能解决一大部分问题，保存下来的还是具有上述所有优点的 Markdown 文档。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;如果有专业需求，增加了各种扩展，哦，这个语法确实要去看一下了。不过一般来讲，大家都会遵循 Markdown 这种简单的精神，也都很干净利落，容易记忆。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;八甚至说&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;八、甚至说&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;什么东西都不可能很完美，我有遇到过它无法实现我想法的时候。又或者说我只是很偶尔的需要某一个小小的功能，我只是用一小下，为此去额外增加一个扩展或者不方便，或者没必要。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;诸如此类各种尴尬的情形。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;那，就直接写 HTML 吧！它，支持的。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;当然这个技能在许多网站上就不能使用了，出于安全考虑，一般网站上是不会支持的。但如果是在自己的笔记里，能兼容 HTML 真的是一种放纵的感觉。&lt;/span&gt;&lt;/p&gt;&lt;h2&gt;&lt;a name=&quot;附录我常用到的语法&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;附录：我常用到的语法&lt;/span&gt;&lt;/h2&gt;&lt;h3&gt;&lt;a name=&quot;标题&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;标题&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;6&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header1 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header1&quot;&gt;# 一号标题 #&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header2 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header2&quot;&gt;## 二号标题 ##&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header3 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header3&quot;&gt;### 三号标题 ###&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header4 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header4&quot;&gt;#### 四号标题 ####&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header5 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header5&quot;&gt;##### 五号标题 #####&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;6&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header6 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header6&quot;&gt;###### 六号标题 ######&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 150px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 150px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;或者&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;6&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header1 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header1&quot;&gt;# 一号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header2 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header2&quot;&gt;## 二号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header3 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header3&quot;&gt;### 三号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header4 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header4&quot;&gt;#### 四号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header5 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header5&quot;&gt;##### 五号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;6&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header6 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-header cm-header6&quot;&gt;###### 六号标题&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 150px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 150px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;还有&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;span&gt;&lt;span&gt;​&lt;/span&gt;x&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header1 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-cm-header cm-cm-header1&quot;&gt;一号标题（下一行三个等号标记&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-header cm-header1&quot;&gt;===&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span cm-text=&quot;&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-header cm-header2 CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-cm-header cm-cm-header2&quot;&gt;二号标题（下一行三个减号标记&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-header cm-header2&quot;&gt;---&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 125px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 125px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;文字&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;文字&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;3&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-strong&quot;&gt;**加粗**&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-em&quot;&gt;*斜体*&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-del&quot;&gt;~~删除线~~&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 75px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 75px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;或者&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;2&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-strong&quot;&gt;__加粗__&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-em&quot;&gt;_斜体_&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 50px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 50px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;其实我就用加粗，别的记不住。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;列表&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;列表&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;无序列表&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;6&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第一项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第二项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第三项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;+ &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;前面是加号也可以&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;减号也可以&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;6&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;* &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;但我还是喜欢用星号&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 150px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 150px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;有序列表&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;5&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;1. &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第一项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;2. &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第二项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;3. &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;第三项&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;4. &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;数字后面必须是英文句点&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-block-start cm-variable-2&quot;&gt;5. &lt;/span&gt;&lt;span class=&quot;cm-variable-2&quot;&gt;句点后面要空格，然后再些内容&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 125px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 125px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;引用&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;引用&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;3&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-atom CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-block-start cm-atom&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot; cm-atom&quot;&gt;这样就是引用，注意大于号后面要有一个空格&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-atom CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-block-start cm-atom&quot;&gt;&amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; cm-atom CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot; cm-block-start cm-atom&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot; cm-atom&quot;&gt;多行内容，每行前面都要有大于号&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 75px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 75px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;代码&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;代码&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span&gt;行内代码&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;行内代码 &lt;span class=&quot;cm-comment&quot;&gt;`Hello World!`&lt;/span&gt;，这样用反引号（就是主键盘数字 1 左侧那个按键）包裹。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;多行代码&lt;/span&gt;&lt;/p&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;6&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot; style=&quot;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-comment&quot;&gt;```javascript&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;三个反引号，然后写语言名称（主要用于代码高亮的识别）&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;然后里面放入代码，无需其他加工。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;4&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;最后三个反引号结尾。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;5&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;注意起始和结尾都需要单独一行。&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;6&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-comment&quot;&gt;```&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 150px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 150px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;链接&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;链接&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-link&quot;&gt;[要显示的文字]&lt;/span&gt;&lt;span class=&quot;cm-string&quot;&gt;(要链接到的地址)&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a name=&quot;图片&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;图片&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-tag&quot;&gt;![图片的描述]&lt;/span&gt;&lt;span class=&quot;cm-string&quot;&gt;(图片的地址)&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;这里，图片的描述部分可能可以加入更多的参数，比如图片显示的尺寸等。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;水平线&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;水平线&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;3&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span cm-text=&quot;&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;2&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span class=&quot;cm-hr&quot;&gt;---&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;3&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;&lt;span cm-text=&quot;&quot;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 75px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 75px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;很多人会告诉你三个减号就是水平线。但其实除了它要独占一行以外，上下两行也要是空行，否则可能有歧义。&lt;/span&gt;&lt;/p&gt;&lt;h3&gt;&lt;a name=&quot;转义&quot; class=&quot;md-header-anchor&quot;&gt;&lt;/a&gt;&lt;span&gt;转义&lt;/span&gt;&lt;/h3&gt;&lt;pre spellcheck=&quot;false&quot; class=&quot;md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded&quot; lang=&quot;markdown&quot;&gt;&lt;div class=&quot;CodeMirror cm-s-inner CodeMirror-wrap&quot; lang=&quot;markdown&quot;&gt;&lt;div style=&quot;overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 37px;&quot;&gt;&lt;textarea autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; tabindex=&quot;0&quot; style=&quot;position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;&quot;&gt;&lt;/textarea&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scrollbar-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-filler&quot; cm-not-content=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-scroll&quot; tabindex=&quot;-1&quot;&gt;&lt;div class=&quot;CodeMirror-sizer&quot; style=&quot;margin-left: 29px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;&quot;&gt;&lt;div style=&quot;position: relative; top: 0px;&quot;&gt;&lt;div class=&quot;CodeMirror-lines&quot; role=&quot;presentation&quot;&gt;&lt;div role=&quot;presentation&quot; style=&quot;position: relative; outline: none;&quot;&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;pre&gt;&lt;span&gt;xxxxxxxxxx&lt;/span&gt;&lt;/pre&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt&quot;&gt;&lt;div&gt;1&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-measure&quot;&gt;&lt;/div&gt;&lt;div style=&quot;position: relative; z-index: 1;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-code&quot; role=&quot;presentation&quot;&gt;&lt;div class=&quot;CodeMirror-activeline&quot; style=&quot;position: relative;&quot;&gt;&lt;div class=&quot;CodeMirror-activeline-background CodeMirror-linebackground&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-background CodeMirror-activeline-gutter&quot; style=&quot;left: -29px; width: 29px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutter-wrapper CodeMirror-activeline-gutter&quot; style=&quot;left: -29px;&quot;&gt;&lt;div class=&quot;CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show&quot; style=&quot;left: 0px; width: 20px;&quot;&gt;1&lt;/div&gt;&lt;/div&gt;&lt;pre class=&quot; CodeMirror-line &quot; role=&quot;presentation&quot;&gt;&lt;span role=&quot;presentation&quot; style=&quot;padding-right: 0.1px;&quot;&gt;\*123\*&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 25px;&quot;&gt;&lt;/div&gt;&lt;div class=&quot;CodeMirror-gutters&quot; style=&quot;height: 25px;&quot;&gt;&lt;div class=&quot;CodeMirror-gutter CodeMirror-linenumbers&quot; style=&quot;width: 28px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;p&gt;&lt;span&gt;这样写就不会出现斜体，而是输出 &lt;/span&gt;&lt;span&gt;*&lt;/span&gt;&lt;span&gt;123&lt;/span&gt;&lt;span&gt;*&lt;/span&gt;&lt;span&gt;。就是在符号前加上斜线，就会直接输出这个符号，而不去当作标记解释。&lt;/span&gt;&lt;/p&gt;&lt;hr /&gt;&lt;p&gt;&lt;span&gt;差不多就这样吧，常用的也就这么些了，其实我自己也就记了一半吧。用起来就知道了，有一些真的不怎么常用的。&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
 </div>
 <div created="20191210105954585" description="小老鼠最近遇到的一些关于软件的事情，以及由此而引发的感想。" modified="20191217034650178" title="小老鼠闲话软件" type="text/x-markdown">
 <pre>小老鼠是个爱折腾软件的家伙，最近几天有连续被打动到，所以便想出来和大家聊一聊。
